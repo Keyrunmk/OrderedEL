@@ -13,15 +13,16 @@ use Illuminate\Queue\SerializesModels;
 class TestEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
+    public string $message;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(string $message)
     {
-        //
+        $this->message = $message;
     }
 
     /**

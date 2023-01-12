@@ -19,5 +19,5 @@ Route::get('/', function () {
 });
 
 Route::get('/test', function(){
-    return response()->json(TestEvent::dispatch());
+    return response()->json(TestEvent::dispatch("asdf"));
 });

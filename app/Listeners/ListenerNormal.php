@@ -2,29 +2,28 @@
 
 namespace App\Listeners;
 
-use App\Traits\ShouldOrderQueue;
-use Illuminate\Bus\Batchable;
+use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Support\Facades\Event;
 
 class ListenerNormal implements ShouldQueue
 {
-    use ShouldOrderQueue;
+    use Queueable;
 
-    public $queue = "normal";
+    // public $queue = "normal";
 
-    public bool $shouldQueue = true;
-
-    public $afterCommit = true;
+    // public $afterCommit = true;
+    public $event;
 
     /**
      * Create the event listener.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($event)
     {
-        //
+        $this->event = $event;
     }
 
     /**
@@ -33,14 +32,9 @@ class ListenerNormal implements ShouldQueue
      * @param  object  $event
      * @return void
      */
-    public function handle($event)
+    public function handle($event=null)
     {
-        // echo "$event->message";
-        echo "Normal";
-    }
-
-    public function shouldQueue()
-    {
-        return $this->shouldQueue;
+        $event = $event ?? $this->event;
+        dd($event->message);
     }
 }
