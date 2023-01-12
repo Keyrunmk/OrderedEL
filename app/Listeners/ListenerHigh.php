@@ -2,21 +2,15 @@
 
 namespace App\Listeners;
 
-use App\Traits\ShouldOrderQueue;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 
 class ListenerHigh implements ShouldQueue
 {
     use Queueable;
 
-    // public $queue = "high";
-
     public bool $shouldQueue = true;
-
-    // public $afterCommit = true;
 
     public $event;
 
@@ -25,7 +19,7 @@ class ListenerHigh implements ShouldQueue
      *
      * @return void
      */
-    public function __construct($event)
+    public function __construct($event=null)
     {
         $this->event = $event;
     }
@@ -39,11 +33,6 @@ class ListenerHigh implements ShouldQueue
     public function handle($event=null)
     {
         $event = $event ?? $this->event;
-        dd($event->message);
-    }
-
-    public function shouldQueue()
-    {
-        return $this->shouldQueue;
+        echo($event->message);
     }
 }
